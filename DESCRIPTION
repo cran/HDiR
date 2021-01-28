@@ -2,7 +2,7 @@ Encoding: UTF-8
 Package: HDiR
 Type: Package
 Title: Directional Highest Density Regions
-Version: 1.0
+Version: 1.1
 Authors@R: c(person("Paula", "Saavedra-Nieves", role = c("aut", "cre"),
                       email = "paula.saavedra@usc.es"),
                person("Rosa M", "Crujeiras", role ="aut"),
@@ -17,10 +17,10 @@ Imports: NPCirc, circular, rgl, Directional, movMF, graphics, stats,
         grDevices
 LazyData: true
 NeedsCompilation: no
-Packaged: 2020-12-04 18:02:46 UTC; Paula Saavedra
+Packaged: 2021-01-28 10:12:56 UTC; Paula Saavedra
 Author: Paula Saavedra-Nieves [aut, cre],
   Rosa M Crujeiras [aut],
   Andrés Prieto [ctb],
   Felicita Scapini [dtc]
 Repository: CRAN
-Date/Publication: 2020-12-07 10:30:07 UTC
+Date/Publication: 2021-01-28 10:40:02 UTC

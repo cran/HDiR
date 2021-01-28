@@ -1,4 +1,4 @@
-7f8e24f9cde908f664729b188514235c *DESCRIPTION
+2c4620f058eaea81c220034c39b6a584 *DESCRIPTION
 1bc4690010e38eaa079bdb3e09209861 *NAMESPACE
 cca7ae69ecb12f4265ee0e54a8e9bfaf *R/cells10.R
 9c643b2326a6f930aa76cf8903dd23bf *R/cells20.R
@@ -7,7 +7,7 @@ b7f322cb1ac72e2c683a31353933fd3f *R/circ.boot.bw.R
 713741e90c05f8af43d067c490e4fe02 *R/circ.boot.sample.R
 f0804483d822b026d87c6f273227391d *R/circ.distances.R
 bddc408d65b516e1f0b555d6e5e4e09d *R/circ.hdr.R
-99bd3ac9708e874453056938c4aa7c96 *R/circ.plugin.hdr.R
+e0e96e411a28cbdac777da51fd812aab *R/circ.plugin.hdr.R
 9bb4b0a0c50d1714150693a85a118366 *R/circ.scatterplot.R
 454b0f09f94570ad14574ec0d216140e *R/dspheremix.R
 312d7423c87b47843cba1a1dcdd95845 *R/earthquakes.R
