@@ -26,7 +26,7 @@ A numeric value 10, 20 or 40 indicating the 3D cartesian mesh used for numerical
   \item{deg}{Integer string indicating the degree (from 0 to 6) of the quadrature rules for triangles on the sphere for numerical integration. Default \code{deg=6}.
 }
   \item{plot.hdr}{
-Logical string. If \code{TRUE}, the boundary of the HDR is represented graphically. Default \code{plot.density=TRUE}.}
+Logical string. If \code{TRUE}, the boundary of the level set or the HDR are represented graphically. Default \code{plot.density=TRUE}.}
   \item{col}{
 Color number for plotting the boundary of the HDR. Default \code{"darkgray"}.}
 }
@@ -38,8 +38,8 @@ If \code{tau} is provided, a list with the next components:%%  If it is a LIST, 
 \item{prob.content}{Probability coverage \code{1-tau}.}
 \item{threshold}{Threshold or level associated to the probability content \code{1-tau}.}
 If \code{level} is provided, a list with the next components:%%  If it is a LIST, use
-\item{hdr}{A matrix of rows of points on the HDR boundary.}
-\item{level}{Level of the HDR.}
+\item{levelset}{A matrix of rows of points on the level set boundary.}
+\item{level}{Level of the level set.}
 }
 \references{
 Saavedra-Nieves, P. and Crujeiras, R. M. (2020). Nonparametric estimation of directional highest density regions. arXiv preprint arXiv:2009.08915.}

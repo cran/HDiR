@@ -13,10 +13,10 @@ sphere.hdr<-function(f,tau=NULL,level=NULL,nborder=1000,tol=0.1,
 		        stop("argument 'level' must be numeric")
 	      }else if((!is.null(level))&(is.numeric(level)) ){
                       if((level>max(fgrid))){
-					stop("highest density region is equal to the emptyset")
+					stop("level set is equal to the emptyset")
 			    }
 			    if((level<min(fgrid))){
-					stop("highest density region is equal to the support")
+					stop("level set is equal to the support")
 			    }
   		 }else{
                  	    if((tau<1)&(tau>0)){
@@ -54,7 +54,7 @@ sphere.hdr<-function(f,tau=NULL,level=NULL,nborder=1000,tol=0.1,
         if(!is.null(tau)){
 			return(list(hdr=hdr.border,prob.content=(1-tau),threshold=level))
 	  }else{
-			return(list(hdr=hdr.border,level=level))
+			return(list(levelset=hdr.border,level=level))
 	  }
 
 }

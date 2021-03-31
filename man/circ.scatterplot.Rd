@@ -6,7 +6,7 @@
 This function produces a circular scatterplot with points coloured according to the HDRs in which they fall.
 }
 \usage{
-circ.scatterplot(sample,tau=c(0.25,0.5,.75),bw=bw.CV(sample),
+circ.scatterplot(sample,tau=c(0.25,0.5,.75),bw=bw.CV(circular(sample)),
                  tau.method="quantile",plot.density=TRUE,col=NULL,
                  shrink=NULL,cex=NULL,lty=NULL)
 }

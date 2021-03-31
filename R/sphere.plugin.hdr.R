@@ -17,10 +17,10 @@ sphere.plugin.hdr<-function(sample,bw="none",ngrid=500,
 		 stop("argument 'level' must be a numeric value")
 	}else if((!is.null(level))&(is.numeric(level)) ){
                              if((level>max(fn$den))){
-						warning("highest density region is equal to the emptyset","\n")
+						warning("level set is equal to the emptyset","\n")
 					      return(list(hdr="emptyset",level=level,bw=bw))
 				      }else if((level<min(fn$den))){
-						warning("highest density region is equal to the support distribution","\n")
+						warning("level set is equal to the support distribution","\n")
 						return(list(hdr="unit sphere",level=level,bw=bw))
 
 					}
@@ -61,7 +61,7 @@ sphere.plugin.hdr<-function(sample,bw="none",ngrid=500,
         if(!is.null(tau)){
 			return(list(hdr=hdr.border,prob.content=(1-tau),threshold=level,bw=bw))
 	  }else{
-			return(list(hdr=hdr.border,level=level,bw=bw))
+			return(list(levelset=hdr.border,level=level,bw=bw))
 	  }
 
 }

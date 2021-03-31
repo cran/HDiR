@@ -14,10 +14,10 @@ circ.hdr<-function(f,tau=NULL,level=NULL,plot.hdr=TRUE,col=NULL,lty=NULL,shrink=
 		        	    stop("argument 'level' must be a numeric value")
 	         		}else if((!is.null(level))&(is.numeric(level)) ){
                       		  if((level>max(fx))){
-						stop("highest density region is equal to the emptyset")
+						stop("level set is equal to the emptyset")
 					  }
 					if((level<min(fx))){
-						stop("highest density region is equal to the support")
+						stop("level set is equal to the support")
 					  }
   		     	      }else{
                  			if((tau<1)&(tau>0)){
@@ -45,7 +45,7 @@ circ.hdr<-function(f,tau=NULL,level=NULL,plot.hdr=TRUE,col=NULL,lty=NULL,shrink=
                        plot.circular(circular(seq(0,2*pi,length=100),type="angles",units="radians"),shrink=shrink,type="l")
                        lines.circular(circular(x,type="angles",units="radians"), fx,shrink=shrink,col=1)
                        lines.circular(circular(x,type="angles",units="radians"),rep(level,times=length(x)),col=col,lty=lty,shrink=shrink)
-                       points.circular(circular(x[(fx>=level)],type="angles",units="radians"),col=col,shrink=shrink,pch=pch,cex=0.6)
+                       points.circular(circular(x[(fx>=level)],type="angles",units="radians"),col=col,shrink=shrink,pch=pch,cex=cex)
 
 
 
@@ -57,7 +57,7 @@ circ.hdr<-function(f,tau=NULL,level=NULL,plot.hdr=TRUE,col=NULL,lty=NULL,shrink=
           if(!is.null(tau)){
 			return(list(hdr=hdr,prob.content=(1-tau),threshold=level))
 	    }else{
-			return(list(hdr=hdr,level=level))
+			return(list(levelset=hdr,level=level))
 
 	    }
 

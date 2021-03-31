@@ -34,7 +34,7 @@ A numeric value 10, 20 or 40 indicating the 3D cartesian mesh used for numerical
   \item{deg}{Integer string indicating the degree (from 0 to 6) of the quadrature rules for triangles on the sphere. Default \code{deg=6}.
 }
   \item{plot.hdr}{
-Logical string. If \code{TRUE}, the HDR is represented graphically. Default \code{plot.hdr=TRUE}. }
+Logical string. If \code{TRUE}, the boundary of the level set or the HDR are represented graphically. Default \code{plot.hdr=TRUE}. }
   \item{col}{
 Color number for plotting the boundary of the HDR. Default \code{"darkgray"}.}
 
@@ -49,8 +49,8 @@ If \code{tau} is provided, a list with the next components:
 \item{threshold}{Threshold or level associated to the probability content \code{1-tau}.}
 \item{bw}{Value of the smoothing parameter used for kernel density estimation.}
 If \code{level} is provided, a list with the next components:
-\item{hdr}{A matrix of rows of points on the HDR boundary or a character indicating if the HDR is equal to the emptyset or the support distribution.}
-\item{level}{Level of the HDR.}
+\item{levelset}{A matrix of rows of points on the level set boundary or a character indicating if the level set is equal to the emptyset or the support distribution.}
+\item{level}{Level of the level set.}
 \item{bw}{Value of the smoothing parameter used for kernel density estimation.}
 
 
@@ -95,8 +95,8 @@ g.earthquakes <- ggplot() +
   geom_point(data = hdr08,
             mapping = aes(x = Long, y = Lat),
             color = "darkblue", size = 1) +
-  scale_y_continuous(breaks = (-2:2) * 30, limits = c(-90, 90)) +
- scale_x_continuous(breaks = (-4:4) * 45, limits = c(-180, 180)) +
+  scale_y_continuous(breaks = NULL, limits = c(-90, 90)) +
+ scale_x_continuous(breaks = NULL, limits = c(-180, 180)) +
   coord_map("mercator")
 g.earthquakes
 }

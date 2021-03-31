@@ -1,4 +1,4 @@
-circ.boot.bw<-function(sample,bw=bw.CV(sample),tau=0.5,B=50,upper=1.5*bw){
+circ.boot.bw<-function(sample,bw=bw.CV(circular(sample)),tau=0.5,B=50,upper=1.5*bw){
    if(!is.numeric(bw)|(length(bw)>1)){
 		stop("argument 'bw' is a bandwidth parameter that must take a positive value")
    }else if(!is.numeric(tau)|(length(tau)>1)|(tau<0)|(tau>1)){
@@ -8,18 +8,18 @@ circ.boot.bw<-function(sample,bw=bw.CV(sample),tau=0.5,B=50,upper=1.5*bw){
    }else{
 
    	n=length(sample)
-   	hdr.p=circ.plugin.hdr(sample,bw=bw,plot.hdr=FALSE,tau,tau.method="quantile")
+   	hdr.p=circ.plugin.hdr(sample,bw=bw,tau,tau.method="quantile",plot.hdr=FALSE,boot=TRUE)
       if(is.character(hdr.p$hdr)){stop("estimated pilot hdr is the emptyset or the unit circle")}
    	circ.mean.dH.distances<-function(sample,n,hdr.p,tau,bw,B,bw1){
    		dH=numeric(B)
   		for(i in 1:B){
 		    sample.boot=circ.boot.sample(sample,n,bw)
-	    	    hdr.boot=circ.plugin.hdr(sample.boot,bw=bw1,tau,tau.method="quantile",plot.hdr=FALSE)
+	    	    hdr.boot=circ.plugin.hdr(sample.boot,bw=bw1,tau,tau.method="quantile",plot.hdr=FALSE,boot=TRUE)
                 if(is.character(hdr.boot$hdr)){
 				dH[i]=NA
 				warning("a bootstrap hdr was equal to the emptyset or the unit circle","\n")
 		     }else{
-	                 dH[i]=circ.distances(hdr.p$hdr,hdr.boot$hdr)$dH
+	                 dH[i]=circ.distances(hdr.p$levelset,hdr.boot$levelset)$dH
                  }
 	       }
 	return(mean(dH))

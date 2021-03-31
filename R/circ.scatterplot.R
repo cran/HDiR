@@ -1,4 +1,4 @@
-circ.scatterplot<-function(sample,tau=c(0.25,0.5,.75),bw=bw.CV(sample),
+circ.scatterplot<-function(sample,tau=c(0.25,0.5,.75),bw=bw.CV(circular(sample)),
                            tau.method="quantile",plot.density=TRUE,col=NULL,shrink=NULL,
                            cex=NULL,lty=NULL){
 	 if(!is.numeric(sample)|any(sample<0)|any(sample>(2*pi))){
@@ -15,7 +15,8 @@ circ.scatterplot<-function(sample,tau=c(0.25,0.5,.75),bw=bw.CV(sample),
 			if(is.null(shrink)){shrink=2}
 			if(is.null(cex)){cex=.5}
 			if(is.null(lty)){lty=rep(2,times=length(tau))}
-        	 	plot.circular(circular(seq(0,2*pi,len=100),type="angles",units="radians"),shrink=shrink,type="l")
+			sample=circular(sample,type="angles",units="radians")
+      plot.circular(circular(seq(0,2*pi,len=100),type="angles",units="radians"),shrink=shrink,type="l")
 			fn=kern.den.circ(sample, bw=bw,len=250)
                   fnx <- kern.den.circ(sample, t=sample, bw=bw)
 			sample.in.hdrs=vector("list", length=length(tau))

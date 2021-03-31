@@ -44,8 +44,8 @@ g.earthquakes <- ggplot() +
   geom_point(data = earthquakes,
             mapping = aes(x = Longitude, y = Latitude),
             color = "red",alpha=.2,size=.75,stroke=0) +
-    scale_y_continuous(breaks = (-2:2) * 30, limits = c(-90, 90)) +
-  scale_x_continuous(breaks = (-4:4) * 45, limits = c(-180, 180)) +
+    scale_y_continuous(breaks = NULL, limits = c(-90, 90)) +
+  scale_x_continuous(breaks = NULL, limits = c(-180, 180)) +
   coord_map("mercator")
 g.earthquakes
 }

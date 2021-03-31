@@ -4,7 +4,7 @@
 \title{Circular smoothing parameter for HDRs estimation}
 \description{
 This function provides the specific smoothing parameter for circular HDRs estimation proposed in Saavedra-Nieves and Crujeiras (2020).}
-\usage{circ.boot.bw(sample, bw = bw.CV(sample), tau = 0.5, B = 50, upper = 1.5 * bw)}
+\usage{circ.boot.bw(sample, bw = bw.CV(circular(sample)), tau = 0.5, B = 50, upper = 1.5 * bw)}
 \arguments{
   \item{sample}{Numeric vector of angles in radians.}
   \item{bw}{Pilot soothing parameter to be used. Following Oliveira et al. (2014), the value of the smoothing parameter can be chosen by using the functions \code{bw.rt}, \code{bw.CV}, \code{bw.pi} or \code{bw.boot}. Default \code{bw=bw.CV} providing a cross-validation bandwidth.}

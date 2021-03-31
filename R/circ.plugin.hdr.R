@@ -1,6 +1,6 @@
 circ.plugin.hdr<-function(sample,bw=bw.CV(circular(sample)),tau=NULL,tau.method="quantile",
-                          level=NULL,conf=.95,plot.hdr=TRUE,plot.hdrconf=TRUE,k=3,
-                          col=NULL,lty=NULL,shrink=NULL,lwd=NULL,pch=NULL){
+                          level=NULL,conf=.95,plot.hdr=TRUE,plot.hdrconf=TRUE,boot=FALSE,k=3,
+                          col=NULL,lty=NULL,shrink=NULL,lwd=NULL,pch=NULL,cex=NULL){
   if(!is.numeric(sample)|any(sample<0)|any(sample>(2*pi))){
     stop("argument 'sample' must be a numeric vector of angles from 0 to 2*pi")
   }else if((!is.numeric(bw))|(length(bw)>1)){
@@ -14,10 +14,10 @@ circ.plugin.hdr<-function(sample,bw=bw.CV(circular(sample)),tau=NULL,tau.method=
       stop("argument 'level' must be a numeric value")
     }else if((!is.null(level))&(is.numeric(level)) ){
       if((level>max(f))){
-        warning("highest density region is equal to the emptyset","\n")
+        warning("level set is equal to the emptyset","\n")
         return(list(hdr="emptyset",level=level,bw=bw))
       }else if((level<min(f))){
-        warning("highest density region is equal to the support distribution","\n")
+        warning("level set is equal to the support distribution","\n")
         return(list(hdr="unit circle",level=level,bw=bw))
       }
     }else{
@@ -42,7 +42,7 @@ circ.plugin.hdr<-function(sample,bw=bw.CV(circular(sample)),tau=NULL,tau.method=
 
   hdr=find.circ.hdr(x,f,level)
 
-  if(!is.null(tau)){
+  if((!is.null(tau))&(boot==FALSE)){
     if(!((conf<1)&(conf>0)))stop("argument 'conf' must be between 0 and 1")
     alpha <- 1 - conf
     nint <- length(hdr)
@@ -68,11 +68,12 @@ circ.plugin.hdr<-function(sample,bw=bw.CV(circular(sample)),tau=NULL,tau.method=
       if(is.null(lty)){lty=2}
       if(is.null(lwd)){lwd=2}
       if(is.null(pch)){pch=19}
+      if(is.null(cex)){cex=.5}
       plot.circular(circular(seq(0,2*pi,length=100),type="angles",units="radians"),shrink=shrink,type="l")
       lines.circular(x, f,shrink=shrink,col=1)
       lines.circular(x,rep(level,times=length(x)),col=col,lty=lty,shrink=shrink)
-      points.circular(x[(f>=level)],col=col,shrink=shrink,pch=pch,cex=0.6)
-
+      points.circular(x[(f>=level)],col=col,shrink=shrink,pch=pch,cex=cex)
+      if(is.null(tau)){plot.hdrconf=FALSE}
       if(plot.hdrconf){
         if(!all(is.na(hdr1))){
           x.1=sort(as.numeric(x[(f>=level.ci[1])]))
@@ -105,9 +106,9 @@ circ.plugin.hdr<-function(sample,bw=bw.CV(circular(sample)),tau=NULL,tau.method=
 
     }
   }
-  if(!is.null(tau)){
+  if((!is.null(tau))&(!boot)){
     return(list(hdr=hdr,prob.content=(1-tau),threshold=level,bw=bw,hdr.lo=hdr1,threshold.lo=level.ci[1],hdr.hi=hdr2,threshold.hi=level.ci[2]))
   }else{
-    return(list(hdr=hdr,level=level,bw=bw))
+    return(list(levelset=hdr,level=level,bw=bw))
   }
 }
