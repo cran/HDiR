@@ -1,7 +1,7 @@
 sphere.hdr<-function(f,tau=NULL,level=NULL,nborder=1000,tol=0.1,
                      mesh=40,deg=6,plot.hdr=TRUE,col=NULL){
       if((is.function(f)==FALSE)){
-		stop("argument 'f' must be a density function defined on the unit sphere")
+		stop("argument 'f' must be a function defined on the unit sphere")
 	}else if((!is.null(level))&(!is.null(tau))){
 		stop("only one argument 'level' or 'tau' must be provided")
 	}else if(((is.null(level))&(is.null(tau)))){
@@ -52,7 +52,7 @@ sphere.hdr<-function(f,tau=NULL,level=NULL,nborder=1000,tol=0.1,
         }
 
         if(!is.null(tau)){
-			return(list(hdr=hdr.border,prob.content=(1-tau),threshold=level))
+			return(list(hdr=hdr.border,prob.content=(1-tau),level=level))
 	  }else{
 			return(list(levelset=hdr.border,level=level))
 	  }

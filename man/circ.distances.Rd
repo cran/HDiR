@@ -9,13 +9,13 @@
 \item{x}{Numeric vector of angles in radians determining a set of points on the unit circle.}
   \item{y}{Numeric vector of angles in radians determining a set of points on the unit circle.}
 }
-\details{If \code{x} and \code{y} corresponds to two HDRs boundaries, this function returns the Euclidean and Hausdorff distances between the HDRs frontiers, but the function computes the Euclidean and Hausdorff distance for two sets of points on the circle, no matter their nature. See Saavedra-Nieves and Crujeiras for more details on these two distances.}
+\details{If \code{x} and \code{y} corresponds to two HDRs boundaries, this function returns the Euclidean and Hausdorff distances between the HDRs frontiers, but the function computes the Euclidean and Hausdorff distance for two sets of points on the circle, no matter their nature. See Saavedra-Nieves and Crujeiras (2021) for more details on these two distances.}
 \value{
 A list with two components:
 \item{dE}{Euclidean distance.}
 \item{dH }{Hausdorff distance.}
 }
-\references{Saavedra-Nieves, P. and Crujeiras, R. M. (2020). Nonparametric estimation of directional highest density regions. arXiv preprint arXiv:2009.08915.}
+\references{Saavedra-Nieves, P. and Crujeiras, R. M. (2021). Nonparametric estimation of directional highest density regions. Advances in Data Analysis and Classification, 1-36.}
 \author{Paula Saavedra-Nieves and Rosa M. Crujeiras.}
 
 \examples{

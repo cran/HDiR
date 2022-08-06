@@ -5,13 +5,17 @@ sphere.plugin.hdr<-function(sample,bw="none",ngrid=500,
 	  stop("argument 'sample' must be a matrix of dimension n by 3 of points on the unit sphere")
 	}
 	eu.sample<- euclid.inv(sample)
-	if((class(bw)=="numeric")&(length(bw)=1)){
+	if((is.numeric(bw))&(length(bw)==1)){
 		fn=vmf.kerncontour2(eu.sample,h=bw,full=FALSE,ngrid=ngrid)
-	}else if (((bw=="none")|(bw=="rot"))&(length(bw)=1)){
+	}else if (((bw=="none")|(bw=="rot"))&(length(bw)==1)){
 		fn=vmf.kerncontour(eu.sample,thumb=bw,den.ret=TRUE,full=FALSE,ngrid=ngrid)
 		bw=fn$h
 	}else{
 		stop("argument 'bw' must be a numeric value or a character equal to rot or none")
+	}
+	fn_sample=numeric(nrow(eu.sample))
+	for(i in 1:nrow(eu.sample)){
+	  fn_sample[i]=fn$den[which.min(abs(eu.sample[i,1]-fn$lat)),which.min(abs(eu.sample[i,2]-fn$long))]
 	}
 	if((!is.null(level))&(!is.numeric(level)) ){
 		 stop("argument 'level' must be a numeric value")
@@ -25,12 +29,8 @@ sphere.plugin.hdr<-function(sample,bw="none",ngrid=500,
 
 					}
   	}else{
-                 			if((tau<1)&(tau>0)){
-                                 	fn_sample=numeric(nrow(eu.sample))
-						for(i in 1:nrow(eu.sample)){
-							fn_sample[i]=fn$den[which.min(abs(eu.sample[i,1]-fn$lat)),which.min(abs(eu.sample[i,2]-fn$long))]
-						}
-						 level=quantile(fn_sample,prob=tau,type=1)
+              if((tau<1)&(tau>0)){
+						       level=quantile(fn_sample,prob=tau,type=1)
 		     			}else{
 			        	    stop("argument 'tau' is a probability that must take a value larger than 0 and smaller than 1")
 		          		}
@@ -59,9 +59,9 @@ sphere.plugin.hdr<-function(sample,bw="none",ngrid=500,
         }
 
         if(!is.null(tau)){
-			return(list(hdr=hdr.border,prob.content=(1-tau),threshold=level,bw=bw))
+			return(list(hdr=hdr.border,prob.content=(1-tau),level=level,bw=bw))
 	  }else{
-			return(list(levelset=hdr.border,level=level,bw=bw))
+			return(list(levelset=hdr.border,prob.content=(sum(fn_sample>=level)/nrow(sample)),level=level,bw=bw))
 	  }
 
 }

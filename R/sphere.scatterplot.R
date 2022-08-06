@@ -2,9 +2,9 @@ sphere.scatterplot<-function(sample,tau=c(0.25,0.5,.75),bw="none",ngrid=500,
                              nborder=1000,tol=0.1, col=NULL){
 	if(!is.matrix(sample)|(ncol(sample)!=3)|any(is.wholenumber(apply((sample)**2,1,sum))!=1)){stop("argument 'sample' must be a matrix of dimension n by 3 of points on the unit sphere")}
 	eu.sample<- euclid.inv(sample)
-	if((class(bw)=="numeric")&(length(bw)=1)&(bw>0)){
+	if((is.numeric(bw))&(length(bw)==1)&(bw>0)){
 		fn=vmf.kerncontour2(eu.sample,h=bw,full=FALSE,ngrid=ngrid)
-	}else if (((bw=="none")|(bw=="rot"))&(length(bw)=1)){
+	}else if (((bw=="none")|(bw=="rot"))&(length(bw)==1)){
 		fn=vmf.kerncontour(eu.sample,thumb=bw,den.ret=TRUE,full=FALSE,ngrid=ngrid)
 	}else{
 		stop("argument 'bw' must be a numeric value or a character equal to rot or none")

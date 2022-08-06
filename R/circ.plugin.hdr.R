@@ -1,4 +1,4 @@
-circ.plugin.hdr<-function(sample,bw=bw.CV(circular(sample)),tau=NULL,tau.method="quantile",
+circ.plugin.hdr<-function(sample,bw=bw.CV(circular(sample),upper=100),tau=NULL,tau.method="quantile",
                           level=NULL,conf=.95,plot.hdr=TRUE,plot.hdrconf=TRUE,boot=FALSE,k=3,
                           col=NULL,lty=NULL,shrink=NULL,lwd=NULL,pch=NULL,cex=NULL){
   if(!is.numeric(sample)|any(sample<0)|any(sample>(2*pi))){
@@ -8,6 +8,7 @@ circ.plugin.hdr<-function(sample,bw=bw.CV(circular(sample)),tau=NULL,tau.method=
   }else{
     sample=circular(sample,type="angles",units="radians")
     fn <- kern.den.circ(sample, bw=bw,len=1000)
+    fnx <- kern.den.circ(sample, t=sample, bw=bw)$y
     x=fn$x
     f=fn$y
     if((!is.null(level))&(!is.numeric(level)) ){
@@ -23,7 +24,6 @@ circ.plugin.hdr<-function(sample,bw=bw.CV(circular(sample)),tau=NULL,tau.method=
     }else{
       if((tau<1)&(tau>0)){
         if(tau.method=="quantile"){
-          fnx <- kern.den.circ(sample, t=sample, bw=bw)$y
           level=quantile(fnx,prob=(tau),type=1)
         }else if(tau.method=="trapezoidal"){
           step=x[2]-x[1]
@@ -107,8 +107,8 @@ circ.plugin.hdr<-function(sample,bw=bw.CV(circular(sample)),tau=NULL,tau.method=
     }
   }
   if((!is.null(tau))&(!boot)){
-    return(list(hdr=hdr,prob.content=(1-tau),threshold=level,bw=bw,hdr.lo=hdr1,threshold.lo=level.ci[1],hdr.hi=hdr2,threshold.hi=level.ci[2]))
+    return(list(hdr=matrix(hdr,ncol=2,byrow=TRUE),prob.content=(1-tau),level=level,bw=bw,hdr.lo=matrix(hdr1,ncol=2,byrow=TRUE),level.lo=level.ci[1],hdr.hi=matrix(hdr2,ncol=2,byrow=TRUE),level.hi=level.ci[2]))
   }else{
-    return(list(levelset=hdr,level=level,bw=bw))
+        return(list(levelset=matrix(hdr,ncol=2,byrow=TRUE),prop.content=(sum(fnx>=level)/length(sample)),level=level,bw=bw))
   }
 }

@@ -1,7 +1,7 @@
 circ.hdr<-function(f,tau=NULL,level=NULL,plot.hdr=TRUE,col=NULL,lty=NULL,shrink=NULL,
                    cex=NULL,pch=NULL){
       if((is.function(f)==FALSE)){
-		stop("argument 'f' must be a density function defined on the unit circle")
+		stop("argument 'f' must be a function defined on the unit circle")
 	}else{
            	    x=seq(0,2*pi,length=1000)
 		    fx=f(circular(x))
@@ -30,7 +30,7 @@ circ.hdr<-function(f,tau=NULL,level=NULL,plot.hdr=TRUE,col=NULL,lty=NULL,shrink=
                   }
               }
 
-	        hdr=find.circ.hdr(x,fx,level)
+	        hdr=matrix(find.circ.hdr(x,fx,level),ncol=2,byrow=TRUE)
 
               if(!is.logical(plot.hdr)){
 		        stop("argument 'plot.hdr' must be logical")
@@ -55,7 +55,7 @@ circ.hdr<-function(f,tau=NULL,level=NULL,plot.hdr=TRUE,col=NULL,lty=NULL,shrink=
               }
 
           if(!is.null(tau)){
-			return(list(hdr=hdr,prob.content=(1-tau),threshold=level))
+			return(list(hdr=hdr,prob.content=(1-tau),level=level))
 	    }else{
 			return(list(levelset=hdr,level=level))
 

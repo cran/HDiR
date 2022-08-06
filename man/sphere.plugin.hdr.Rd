@@ -15,11 +15,11 @@ sphere.plugin.hdr(sample,bw="none",ngrid=500,
  \arguments{
   \item{sample}{
 A matrix whose rows represent points on the unit sphere in Cartesian coordinates. If a row norm is different from one, a message appears indicating that they must be standardized.}
-  \item{bw}{Smoothing parameter to be used. According to \code{Directional} package, this can be either \code{"none"} for cross validation or \code{"rot"} for the rule of thumb suggested by García-Portugués (2013). It could be also selecting by considering \code{sphere.boot.bw}, the new smoothing parameter proposed in Saavedra-Nieves and Crujeiras (2020). Default \code{bw="none"}.}
+  \item{bw}{Smoothing parameter to be used. It can be a numeric value directly selected by the user. According to \code{Directional} package, this could be also either \code{"none"} for cross validation or \code{"rot"} for the rule of thumb suggested by García-Portugués (2013).  Moreover, function \code{sphere.boot.bw} allows to select the new smoothing parameter proposed in Saavedra-Nieves and Crujeiras (2021). Default \code{bw="none"}.}
   \item{ngrid}{
 Sets the resolution of the density calculation. Default \code{ngrid=500}.}
   \item{tau}{
-Numeric probability. According to Saavedra-Nieves and Crujeiras (2020), \code{1-tau} represents the probability coverage required for HDR. If \code{tau=NULL}, a value for the threshold \code{level} of the HDR must be provided.}
+Numeric probability. According to Saavedra-Nieves and Crujeiras (2021), \code{1-tau} represents the probability coverage required for HDR. If \code{tau=NULL}, a value for the threshold \code{level} of the HDR must be provided.}
   \item{level}{Numeric threshold of the HDR provided by the user. When \code{level} is larger than the maximum value of the density, the HDR is equal to the emptyset. If \code{level} is smaller than the minimum of the density, the HDR coincides with the support distribution. If \code{level=NULL}, a value for the probability coverage \code{1-tau} of the HDR must be provided.}
 
   \item{nborder}{
@@ -40,17 +40,18 @@ Color number for plotting the boundary of the HDR. Default \code{"darkgray"}.}
 
 }
 \details{
-A detailed definition of plug-in estimators for directional HDRs is given in Saavedra-Nieves and Crujeiras (2020). Moreover, the density quantile algorithm proposed in Hyndman (1996) is used to compute the threshold of HDR.  }
+A detailed definition of plug-in estimators for directional HDRs is given in Saavedra-Nieves and Crujeiras (2021). Moreover, the density quantile algorithm proposed in Hyndman (1996) is used to compute the threshold of HDR.  }
 
 \value{
 If \code{tau} is provided, a list with the next components:
 \item{hdr}{A matrix of rows of points on the HDR boundary.}
 \item{prob.content}{Probability coverage \code{1-tau}.}
-\item{threshold}{Threshold or level associated to the probability content \code{1-tau}.}
+\item{level}{Threshold associated to the probability content \code{1-tau}.}
 \item{bw}{Value of the smoothing parameter used for kernel density estimation.}
 If \code{level} is provided, a list with the next components:
 \item{levelset}{A matrix of rows of points on the level set boundary or a character indicating if the level set is equal to the emptyset or the support distribution.}
-\item{level}{Level of the level set.}
+\item{prob.content}{Probability coverage \code{1-tau} associated to the \code{level} value.}
+\item{level}{Threshold of the level set.}
 \item{bw}{Value of the smoothing parameter used for kernel density estimation.}
 
 
@@ -59,7 +60,7 @@ If \code{level} is provided, a list with the next components:
 García-Portugués, E. (2013). Exact risk improvement of bandwidth selectors for kernel density
 estimation with directional data. Electronic Journal of Statistics, 7, 1655-1685.\cr
 Hyndman, R.J. (1996). Computing and graphing highest density regions, The American Statistician, 50, 120-126.\cr
-Saavedra-Nieves, P. and Crujeiras, R. M. (2020). Nonparametric estimation of directional highest density regions. arXiv preprint arXiv:2009.08915.}
+Saavedra-Nieves, P. and Crujeiras, R. M. (2021). Nonparametric estimation of directional highest density regions. Advances in Data Analysis and Classification, 1-36.}
 \author{
 Paula Saavedra-Nieves and Rosa M. Crujeiras.
 }
@@ -67,6 +68,7 @@ Paula Saavedra-Nieves and Rosa M. Crujeiras.
 \examples{
 \donttest{
 # Plug-in HDR estimator for spherical model 9 in HDiR package
+set.seed(1)
 sample=rspheremix(1000, model =9)
 sphere.plugin.hdr(sample,tau=0.8,col="red")
 

@@ -1,4 +1,4 @@
-circ.scatterplot<-function(sample,tau=c(0.25,0.5,.75),bw=bw.CV(circular(sample)),
+circ.scatterplot<-function(sample,tau=c(0.25,0.5,.75),bw=bw.CV(circular(sample),upper=100),
                            tau.method="quantile",plot.density=TRUE,col=NULL,shrink=NULL,
                            cex=NULL,lty=NULL){
 	 if(!is.numeric(sample)|any(sample<0)|any(sample>(2*pi))){
