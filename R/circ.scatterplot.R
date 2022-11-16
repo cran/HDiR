@@ -17,8 +17,8 @@ circ.scatterplot<-function(sample,tau=c(0.25,0.5,.75),bw=bw.CV(circular(sample),
 			if(is.null(lty)){lty=rep(2,times=length(tau))}
 			sample=circular(sample,type="angles",units="radians")
       plot.circular(circular(seq(0,2*pi,len=100),type="angles",units="radians"),shrink=shrink,type="l")
-			fn=kern.den.circ(sample, bw=bw,len=250)
-                  fnx <- kern.den.circ(sample, t=sample, bw=bw)
+			fn=kern.den.circ(sample, bw=bw,n=250)
+                  fnx <- kern.den.circ(sample, z=sample, bw=bw)
 			sample.in.hdrs=vector("list", length=length(tau))
          	      for(i in 1:length(tau)){
                               if(tau.method=="quantile"){

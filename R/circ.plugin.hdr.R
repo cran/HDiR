@@ -7,8 +7,8 @@ circ.plugin.hdr<-function(sample,bw=bw.CV(circular(sample),upper=100),tau=NULL,t
     stop("argument 'bw' is a bandwidth parameter that must take a positive value")
   }else{
     sample=circular(sample,type="angles",units="radians")
-    fn <- kern.den.circ(sample, bw=bw,len=1000)
-    fnx <- kern.den.circ(sample, t=sample, bw=bw)$y
+    fn <- kern.den.circ(sample, bw=bw,n=1000)
+    fnx <- kern.den.circ(sample, z=sample, bw=bw)$y
     x=fn$x
     f=fn$y
     if((!is.null(level))&(!is.numeric(level)) ){
